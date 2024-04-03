@@ -41,10 +41,10 @@ class _HomeHeaderState extends State<HomeHeader> {
             child: state.status == FetchStatusUser.fetching
                 ?  Container(
                           alignment: Alignment.center,
-                          height: MediaQuery.of(context).size.width * 0.11,
+                          height: MediaQuery.of(context).size.width * 0.13,
                           child: _loading())
                 : Container(
-                    height: MediaQuery.of(context).size.width * 0.11,
+                    height: MediaQuery.of(context).size.width * 0.13,
                     child: _buildContentHeader(items),
                   ));
       },
@@ -86,7 +86,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize:
-                                MediaQuery.of(context).size.height * 0.025),
+                                MediaQuery.of(context).size.width * 0.050),
                       ),
                     ],
                   ),
@@ -103,7 +103,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize:
-                                MediaQuery.of(context).size.height * 0.014),
+                                MediaQuery.of(context).size.width * 0.030),
                       ),
                     ],
                   ),

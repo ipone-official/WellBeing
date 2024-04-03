@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,7 +79,7 @@ class _RecordPageState extends State<RecordPage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(0, 127, 196, 100),
       appBar: AppBar(
-        title: Text('Runner',
+        title: Text('I.P. ONE Run to The Moon',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         automaticallyImplyLeading: false,
       ),
@@ -135,7 +136,7 @@ class _RecordPageState extends State<RecordPage> {
           ],
         ),
         width: MediaQuery.of(context).size.width * 0.95,
-        height: MediaQuery.of(context).size.width * 0.47, // ปรับขนาด
+        height: MediaQuery.of(context).size.width * 0.55, // ปรับขนาด
       ),
       SizedBox(height: MediaQuery.of(context).size.height * 0.020),
       InkWell(
@@ -221,7 +222,7 @@ class _RecordPageState extends State<RecordPage> {
                       margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.height * 0.015,
                       ),
-                      height: MediaQuery.of(context).size.height * 0.06,
+                      height: MediaQuery.of(context).size.width * 0.15,
                       width: MediaQuery.of(context).size.width * 0.12,
                       child: Container(
                         child: Column(
@@ -230,14 +231,14 @@ class _RecordPageState extends State<RecordPage> {
                             _imageOther[index] != ''
                                 ? Image.asset(
                                     _imageOther[index],
-                                    height: MediaQuery.of(context).size.height *
-                                        0.06,
+                                    height: MediaQuery.of(context).size.width *
+                                        0.15,
                                     width: MediaQuery.of(context).size.width *
                                         0.06,
                                   )
                                 : SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.06,
+                                    height: MediaQuery.of(context).size.width *
+                                        0.15,
                                     width: MediaQuery.of(context).size.width *
                                         0.06,
                                   ),
@@ -251,7 +252,7 @@ class _RecordPageState extends State<RecordPage> {
                       margin: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height * 0.010,
                       ),
-                      height: MediaQuery.of(context).size.height * 0.030,
+                      height: MediaQuery.of(context).size.width * 0.060,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -286,7 +287,7 @@ class _RecordPageState extends State<RecordPage> {
                   margin: EdgeInsets.only(
                     left: MediaQuery.of(context).size.height * 0.015,
                   ),
-                  height: MediaQuery.of(context).size.height * 0.070,
+                  height: MediaQuery.of(context).size.width * 0.16,
                   width: MediaQuery.of(context).size.width * 0.12,
                   child: Container(
                     margin: EdgeInsets.only(
@@ -314,7 +315,7 @@ class _RecordPageState extends State<RecordPage> {
               ),
               Expanded(
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.070,
+                  height: MediaQuery.of(context).size.width * 0.16,
                   width: MediaQuery.of(context).size.width * 0.06,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -323,17 +324,17 @@ class _RecordPageState extends State<RecordPage> {
                           style: TextStyle(
                               color: Colors.grey[700],
                               fontSize:
-                                  MediaQuery.of(context).size.height * 0.016)),
+                                  MediaQuery.of(context).size.width * 0.032)),
                       Text('รหัสพนักงาน ${rankRunner[index].employeeId}',
                           style: TextStyle(
                               color: Colors.grey[700],
                               fontSize:
-                                  MediaQuery.of(context).size.height * 0.016)),
+                                  MediaQuery.of(context).size.width * 0.032)),
                       Text('${rankRunner[index].sumRecord} Km.',
                           style: TextStyle(
                               color: Colors.grey[700],
                               fontSize:
-                                  MediaQuery.of(context).size.height * 0.016)),
+                                  MediaQuery.of(context).size.width * 0.032)),
                     ],
                   ),
                 ),
@@ -379,7 +380,7 @@ class _RecordPageState extends State<RecordPage> {
             ),
           ),
           HomeHeader(),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.025),
+          SizedBox(height: MediaQuery.of(context).size.width * 0.013),
           Container(child: BlocBuilder<RecordMeBloc, RecordMeState>(
             builder: (context, state) {
               final rankMeRunners = state.rankMeRunner;
@@ -391,14 +392,14 @@ class _RecordPageState extends State<RecordPage> {
                       ? 
                       Container(
                           alignment: Alignment.center,
-                          height: MediaQuery.of(context).size.height * 0.125,
+                          height: MediaQuery.of(context).size.width * 0.27,
                           child: _loading())
                       : Container(
-                          height: MediaQuery.of(context).size.height * 0.125,
+                          height: MediaQuery.of(context).size.width * 0.27,
                           child: _buildMeRunner(rankMeRunners)));
             },
           )),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.025),
+          SizedBox(height: MediaQuery.of(context).size.width * 0.013),
           Container(
             child: Column(
               children: [
@@ -411,7 +412,7 @@ class _RecordPageState extends State<RecordPage> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize:
-                                MediaQuery.of(context).size.height * 0.019),
+                                MediaQuery.of(context).size.width * 0.040),
                       ),
                     ],
                   ),
@@ -426,11 +427,11 @@ class _RecordPageState extends State<RecordPage> {
                             ? Container(
                                 alignment: Alignment.center,
                                 height:
-                                    MediaQuery.of(context).size.height * 0.45,
+                                    MediaQuery.of(context).size.height * 0.47,
                                 child: _loading())
                             : Container(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.45,
+                                    MediaQuery.of(context).size.height * 0.47,
                                 child: _buildTopRankRunner(rankRunners)));
                   },
                 )),
@@ -458,7 +459,7 @@ class _RecordPageState extends State<RecordPage> {
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: MediaQuery.of(context).size.height * 0.014),
+                      fontSize: MediaQuery.of(context).size.width * 0.028),
                 ),
               ],
             ),
@@ -489,38 +490,38 @@ class _RecordPageState extends State<RecordPage> {
                   child: Text(
                     "มาเริ่มวิ่งกันเลย",
                     style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.height * 0.014,
+                        fontSize: MediaQuery.of(context).size.width * 0.035,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
                 ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Color.fromRGBO(
-                0,
-                127,
-                196,
-                100,
-              ),
-              backgroundColor: Color.fromRGBO(248, 200, 73, 1),
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-              shape: StadiumBorder(),
-              side: BorderSide(
-                width: 2,
-                color: Color.fromRGBO(248, 200, 73, 1),
-              ),
-            ),
-            onPressed: () {
-              _loading();
-            },
-            child: Text(
-              "Show",
-              style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.height * 0.014,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-          ),
+          // ElevatedButton(
+          //   style: ElevatedButton.styleFrom(
+          //     foregroundColor: Color.fromRGBO(
+          //       0,
+          //       127,
+          //       196,
+          //       100,
+          //     ),
+          //     backgroundColor: Color.fromRGBO(248, 200, 73, 1),
+          //     padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+          //     shape: StadiumBorder(),
+          //     side: BorderSide(
+          //       width: 2,
+          //       color: Color.fromRGBO(248, 200, 73, 1),
+          //     ),
+          //   ),
+          //   onPressed: () {
+          //     _loading();
+          //   },
+          //   child: Text(
+          //     "Show",
+          //     style: TextStyle(
+          //         fontSize: MediaQuery.of(context).size.height * 0.014,
+          //         fontWeight: FontWeight.bold,
+          //         color: Colors.white),
+          //   ),
+          // ),
           SizedBox(
             height: MediaQuery.of(context).size.width * 0.02,
           ),
@@ -562,8 +563,8 @@ class _RecordPageState extends State<RecordPage> {
                         borderRadius: BorderRadius.circular(10),
                         child: SizedBox.fromSize(
                             size: Size.fromRadius(
-                                MediaQuery.of(context).size.height *
-                                    0.030), // Image radius
+                                MediaQuery.of(context).size.width *
+                                    0.065), // Image radius
                             child: Image.asset(
                               Asset.RunnerImage,
                             ))),
@@ -572,14 +573,14 @@ class _RecordPageState extends State<RecordPage> {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.height * 0.030),
+                          fontSize: MediaQuery.of(context).size.width * 0.060),
                     ),
                     Text(
                       'ระยะทางรวม (Km.)',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.height * 0.014),
+                          fontSize: MediaQuery.of(context).size.width * 0.030),
                     ),
                   ]),
                   VerticalDivider(
@@ -592,8 +593,8 @@ class _RecordPageState extends State<RecordPage> {
                         borderRadius: BorderRadius.circular(10),
                         child: SizedBox.fromSize(
                             size: Size.fromRadius(
-                                MediaQuery.of(context).size.height *
-                                    0.030), // Image radius
+                                MediaQuery.of(context).size.width *
+                                    0.060), // Image radius
                             child: Image.asset(
                               Asset.RunnerApp4,
                             ))),
@@ -602,14 +603,14 @@ class _RecordPageState extends State<RecordPage> {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.height * 0.030),
+                          fontSize: MediaQuery.of(context).size.width * 0.060),
                     ),
                     Text(
                       'คุณอยู่ในลำดับที่',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.height * 0.014),
+                          fontSize: MediaQuery.of(context).size.width * 0.030),
                     ),
                   ]),
                 ],
@@ -692,7 +693,7 @@ class _RecordPageState extends State<RecordPage> {
                       'เริ่มบันทึกกันเลย',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.height * 0.019),
+                          fontSize: MediaQuery.of(context).size.width * 0.037),
                     ),
                   ],
                 ),
@@ -701,11 +702,14 @@ class _RecordPageState extends State<RecordPage> {
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: TextField(
                   keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9.]')),],
+                  maxLength: 10,
                   controller: _Recode,
                   style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.height * 0.019),
+                      fontSize: MediaQuery.of(context).size.width * 0.030),
                   readOnly: false,
                   decoration: InputDecoration(
+                    counterText: '',
                     labelText: "ระยะทาง (Km.)",
                     border: OutlineInputBorder(),
                   ),
@@ -751,7 +755,7 @@ class _RecordPageState extends State<RecordPage> {
                       'บันทึก',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.height * 0.016),
+                          fontSize: MediaQuery.of(context).size.width * 0.033),
                     ),
                   ),
                   OutlinedButton(
@@ -775,7 +779,7 @@ class _RecordPageState extends State<RecordPage> {
                       'ไม่วิ่งแล้วดีกว่า!',
                       style: TextStyle(
                           color: Color.fromRGBO(0, 127, 196, 1),
-                          fontSize: MediaQuery.of(context).size.height * 0.016),
+                          fontSize: MediaQuery.of(context).size.width * 0.033),
                     ),
                   ),
                 ],

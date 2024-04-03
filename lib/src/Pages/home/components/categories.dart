@@ -21,8 +21,8 @@ class Items {
 }
 
 Items Runner = new Items(
-    title: "กิจกรรมวิ่ง",
-    subtitle: "วิ่งด้วยกัน ไปได้ไกล",
+    title: "Run to The Moon",
+    subtitle: "วิ่งให้ถึงดวงจันทร์",
     event: AppRoute.record,
     img: Asset.LogoRunnerImage);
 
@@ -57,8 +57,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       borderRadius: BorderRadius.circular(10),
                       child: SizedBox.fromSize(
                           size: Size.fromRadius(
-                              MediaQuery.of(context).size.height *
-                                  0.055), // Image radius
+                              MediaQuery.of(context).size.width *
+                                  0.10), // Image radius
                           child: Image.asset(
                             data.img.toString(),
                           ))),
@@ -68,14 +68,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: MediaQuery.of(context).size.height * 0.016),
+                        fontSize: MediaQuery.of(context).size.width * 0.030),
                   ),
                   Text(
                     '${data.subtitle}',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: MediaQuery.of(context).size.height * 0.010),
+                        fontSize: MediaQuery.of(context).size.width * 0.023),
                   ),
                 ],
               ),

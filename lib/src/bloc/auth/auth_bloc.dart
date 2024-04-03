@@ -37,10 +37,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else {
         emit(state.copyWith(
             status: LoginStatus.failed,
-            dialogMessage: "Invalid Username or Password!"));
+            dialogMessage: "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง!"));
       }
-      //  CustomFlushbar.showSuccess(navigatorState.currentContext!,
-      //       message: result);
     });
     // Logout
     on<AuthEventLogout>((event, emit) async {

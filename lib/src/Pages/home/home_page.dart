@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Color.fromRGBO(0, 127, 196, 100),
       appBar: AppBar(
         // title: Text('Well-being', style: TextStyle(color: Color.fromRGBO(0, 127, 196, 100),)),
-        title: Text('Well-being',
+        title: Text('I.P. ONE WELL-BEING',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         automaticallyImplyLeading: false,
         actions: [
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize:
-                                MediaQuery.of(context).size.height * 0.014),
+                                MediaQuery.of(context).size.width * 0.030),
                       ),
                     ],
                   ),
@@ -91,8 +91,8 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: MediaQuery.of(context).size.height *
-                                      0.019),
+                                  fontSize: MediaQuery.of(context).size.width *
+                                      0.040),
                             ),
                           ],
                         ),
@@ -197,7 +197,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // widget _ImageSlideshow(){
-
-  // }
 }

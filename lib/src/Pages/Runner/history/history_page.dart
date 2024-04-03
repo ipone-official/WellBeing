@@ -56,7 +56,7 @@ class _HistoryPageState extends State<HistoryPage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(0, 127, 196, 100),
       appBar: AppBar(
-        title: Text('Runner',
+        title: Text('I.P. ONE Run to The Moon',
             //  style: TextStyle(color: Color.fromRGBO(0, 127, 196, 100),
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         automaticallyImplyLeading: false,
@@ -97,7 +97,7 @@ class _HistoryPageState extends State<HistoryPage> {
                       'ประวัติ',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.height * 0.019),
+                          fontSize: MediaQuery.of(context).size.width * 0.035),
                     ),
                   ],
                 ),
@@ -201,74 +201,6 @@ class _HistoryPageState extends State<HistoryPage> {
     });
   }
 
-  Widget _buildHistoryRunner() {
-    return Container(
-      margin: EdgeInsets.all(5),
-      child: SingleChildScrollView(
-        child: Column(children: [
-          Center(
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.043,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(248, 200, 73, 1),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'ประวัติ',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: MediaQuery.of(context).size.height * 0.022),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: TextField(
-          //     onChanged: (value) {
-          //       filterSearchResults(value);
-          //     },
-          //     controller: editingController,
-          //     decoration: InputDecoration(
-          //         labelText: "ค้นหา",
-          //         hintText: "ค้นหา",
-          //         prefixIcon: Icon(Icons.search),
-          //         border: OutlineInputBorder(
-          //             borderRadius: BorderRadius.all(Radius.circular(25.0)))),
-          //   ),
-          // ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text("วันที่บันทึก"), Text("ระยะทาง (Km.)")],
-            ),
-          ),
-          Container(child: BlocBuilder<HistoryBloc, HistoryState>(
-            builder: (context, state) {
-              items = state.history;
-              return RefreshIndicator(
-                  onRefresh: () async => context
-                      .read<HistoryBloc>()
-                      .add(HistoryEventFetch('003796')),
-                  child: state.status == FetchStatusHistory.fetching
-                      ? _buildLoadingView()
-                      : Container(
-                          height: MediaQuery.of(context).size.height * 0.6,
-                          child: _buildContentHistory(
-                              _filterSearchResults.length == 0
-                                  ? items
-                                  : _filterSearchResults)));
-            },
-          )),
-        ]),
-      ),
-    );
-  }
 
   _buildLoadingView() => Container(
       alignment: Alignment.center,
@@ -317,12 +249,12 @@ class _HistoryPageState extends State<HistoryPage> {
                           style: TextStyle(
                               color: Colors.black,
                               fontSize:
-                                  MediaQuery.of(context).size.height * 0.018)),
+                                  MediaQuery.of(context).size.width * 0.033)),
                       Text('${historyRunner[index].record}',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize:
-                                  MediaQuery.of(context).size.height * 0.018)),
+                                  MediaQuery.of(context).size.width * 0.033)),
                     ],
                   ),
                 ),

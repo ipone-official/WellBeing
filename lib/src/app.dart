@@ -15,7 +15,6 @@ import 'package:intl/intl.dart';
 import 'Pages/app_routes.dart';
 import 'Pages/home/home_page.dart';
 import 'constants/network_api.dart';
-import 'pages/loading/loading_page.dart';
 import 'package:logger/logger.dart';
 
 final navigatorState = GlobalKey<NavigatorState>();
@@ -61,7 +60,7 @@ class App extends StatelessWidget {
         contactBloc
       ],
       child: MaterialApp(
-        title: "I.P.ONE Well-being",
+        title: "I.P. ONE WELL-BEING",
         routes: AppRoute.all,
         theme: theme(),
         home: _buildInitialPage(),
@@ -71,13 +70,13 @@ class App extends StatelessWidget {
   }
 
   _buildInitialPage() {
+    print("Login");
     return FutureBuilder(
       future: SharedPreferences.getInstance(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return LoadingPage();
+          return SizedBox();
         }
-
         final prefs = snapshot.data!;
         final token = prefs.getString(NetworkAPI.token);
         return token == null ? LoginPage() : HomePage();

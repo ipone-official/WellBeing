@@ -12,13 +12,11 @@ class RecordRunnerBloc extends Bloc<RecordRunnerEvent, RecordRunnerState> {
       final _imageFile = event.image!;
 
       emit(state.copyWith(status: SubmitStatus.submitting));
-      // await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 1));
       try {
         String result;
         result = await NetworkService()
             .postRecordRunner(_employeeId, _record, _imageFile);
-            print("============");
-            print(result);
         if (result == '200') {
           emit(state.copyWith(
               status: SubmitStatus.success, dialogMessage: "บันทึกสำเร็จ"));

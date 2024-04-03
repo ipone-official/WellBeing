@@ -8,12 +8,6 @@ import 'src/app.dart';
 
 Future<void> main() async {
    HttpOverrides.global = MyHttpOverrides();
-  //  SystemChrome.setPreferredOrientations([
-  //   DeviceOrientation.portraitUp,
-  //   DeviceOrientation.portraitDown
-  //   ]).then((_){
-  //     runApp(const App());
-  // });
   runApp(const App());
 }
 

@@ -3,7 +3,6 @@ import 'Runner/history/contact_page.dart';
 import 'Runner/history/history_page.dart';
 import 'Runner/record_page.dart';
 import 'home/home_page.dart';
-import 'loading/loading_page.dart';
 import 'login/login_page.dart';
 
 class AppRoute {
@@ -18,7 +17,6 @@ class AppRoute {
         login: (context) => const LoginPage(),
         home: (context) => const HomePage(),
         record: (context) => const RecordPage(),
-        loading: (context) => const LoadingPage(),
         history: (context) => const HistoryPage(),
         contact: (context) => const ContactPage(),
       };
