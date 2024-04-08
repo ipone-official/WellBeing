@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:universal_io/io.dart';
 import 'package:wellbeing/src/Pages/models/contact.dart';
 import 'package:wellbeing/src/Pages/models/history_runner.dart';
 import 'package:wellbeing/src/Pages/models/rank_runner.dart';
@@ -45,14 +47,14 @@ class NetworkService {
   //     ),
   //   );
   final Dio _dio = Dio();
-  NetworkService() {
-    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (HttpClient client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-      return client;
-    };
-  }
+  // NetworkService() {
+  //   (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+  //       (HttpClient client) {
+  //     client.badCertificateCallback =
+  //         (X509Certificate cert, String host, int port) => true;
+  //     return client;
+  //   };
+  // }
 
   Future<String> Login(String userId, String password) async {
     try {
@@ -111,9 +113,9 @@ class NetworkService {
   }
 
   Future<String> postRecordRunner(
-      String employeeId, String record, File imageFile) async {
+      String employeeId, String record, Uint8List imageFile) async {
     try {
-      String fileName = '${employeeId}_${imageFile.path.split('/').last}';
+      String fileName = '${employeeId}';
       var params = {
         "employeeId": employeeId,
         "record": record.toString(),
@@ -127,14 +129,18 @@ class NetworkService {
             headers: {HttpHeaders.contentTypeHeader: "application/json"}),
         data: jsonEncode(params),
       );
+
+      print("imageFile");
+      print(imageFile);
       FormData formData = FormData.fromMap({
         if (imageFile != null)
-          'file': await MultipartFile.fromFile(
-            imageFile.path,
+          'file': await MultipartFile.fromBytes(
+            imageFile,
             filename: fileName,
             contentType: new MediaType("image", "jpg"),
           ),
       });
+
       String urlInsertImage = NetworkAPI.uploadImageRunner;
       Response response = await Dio().post(
         urlInsertImage,
