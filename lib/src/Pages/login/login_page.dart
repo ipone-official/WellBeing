@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               width: MediaQuery.of(context).size.width * 0.95,
-              height: MediaQuery.of(context).size.height * 0.28,
+              height: MediaQuery.of(context).size.height * 0.35,
               child: Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: Column(
@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(
                                 color: Color.fromARGB(255, 255, 255, 255),
                                 fontSize:
-                                    MediaQuery.of(context).size.width * 0.040),
+                                    MediaQuery.of(context).size.width * 0.025),
                           ),
                         );
                       },
