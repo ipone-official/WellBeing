@@ -136,7 +136,7 @@ class _RecordPageState extends State<RecordPage> {
           ],
         ),
         width: MediaQuery.of(context).size.width * 0.95,
-        height: MediaQuery.of(context).size.width * 0.55, // ปรับขนาด
+        height: MediaQuery.of(context).size.height * 0.3, // ปรับขนาด
       ),
       SizedBox(height: MediaQuery.of(context).size.height * 0.020),
       InkWell(
@@ -222,7 +222,7 @@ class _RecordPageState extends State<RecordPage> {
                       margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.height * 0.015,
                       ),
-                      height: MediaQuery.of(context).size.width * 0.15,
+                      height: MediaQuery.of(context).size.height * 0.08,
                       width: MediaQuery.of(context).size.width * 0.12,
                       child: Container(
                         child: Column(
@@ -231,14 +231,14 @@ class _RecordPageState extends State<RecordPage> {
                             _imageOther[index] != ''
                                 ? Image.asset(
                                     _imageOther[index],
-                                    height: MediaQuery.of(context).size.width *
-                                        0.15,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.08,
                                     width: MediaQuery.of(context).size.width *
                                         0.06,
                                   )
                                 : SizedBox(
-                                    height: MediaQuery.of(context).size.width *
-                                        0.15,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.08,
                                     width: MediaQuery.of(context).size.width *
                                         0.06,
                                   ),
@@ -250,9 +250,9 @@ class _RecordPageState extends State<RecordPage> {
                   Center(
                     child: Container(
                       margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * 0.010,
+                        top: MediaQuery.of(context).size.height * 0.020,
                       ),
-                      height: MediaQuery.of(context).size.width * 0.060,
+                      height: MediaQuery.of(context).size.height * 0.050,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -389,8 +389,7 @@ class _RecordPageState extends State<RecordPage> {
                       .read<RecordMeBloc>()
                       .add(MeRunnerEventFetch(employeeId)),
                   child: state.status == FetchRecordMeStatus.fetching
-                      ? 
-                      Container(
+                      ? Container(
                           alignment: Alignment.center,
                           height: MediaQuery.of(context).size.width * 0.27,
                           child: _loading())
@@ -702,7 +701,9 @@ class _RecordPageState extends State<RecordPage> {
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: TextField(
                   keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9.]')),],
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                  ],
                   maxLength: 10,
                   controller: _Recode,
                   style: TextStyle(

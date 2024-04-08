@@ -1,0 +1,54 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_email_sender (0.0.1):
+    - Flutter
+  - image_cropper (0.0.4):
+    - Flutter
+    - TOCropViewController (~> 2.6.1)
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - TOCropViewController (2.6.1)
+  - url_launcher_ios (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_email_sender (from `.symlinks/plugins/flutter_email_sender/ios`)
+  - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+
+SPEC REPOS:
+  trunk:
+    - TOCropViewController
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_email_sender:
+    :path: ".symlinks/plugins/flutter_email_sender/ios"
+  image_cropper:
+    :path: ".symlinks/plugins/image_cropper/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+
+SPEC CHECKSUMS:
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_email_sender: 02d7443217d8c41483223627972bfdc09f74276b
+  image_cropper: a3291c624a953049bc6a02e1f8c8ceb162a24b25
+  image_picker_ios: b545a5f16c0fa88e3ecbbce3ed4de45567a8ec18
+  shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695
+  TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
+  url_launcher_ios: 6116280ddcfe98ab8820085d8d76ae7449447586
+
+PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
+
+COCOAPODS: 1.15.2

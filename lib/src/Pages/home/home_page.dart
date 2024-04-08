@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                     // ],
                   ),
                   width: MediaQuery.of(context).size.width * 0.95,
-                  height: MediaQuery.of(context).size.width * 1.18,
+                  height: MediaQuery.of(context).size.height * 0.6,
                   child: Column(
                     children: [
                       Padding(
@@ -119,8 +119,9 @@ class _HomePageState extends State<HomePage> {
                                       alignment: Alignment.center,
                                       width: MediaQuery.of(context).size.width *
                                           0.30,
-                                      height: MediaQuery.of(context).size.height *
-                                          0.30,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.30,
                                       child: Text("ไม่พบรูปภาพ"));
                                 },
                                 fit: BoxFit.contain,
@@ -196,5 +197,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
 }
