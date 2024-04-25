@@ -11,7 +11,7 @@ class NetworkAPI {
   static const String rankRunner = '/getRankRunner';
   static const String meRunner = '/getMeRunner';
   static const String getUser = '/getUserById';
-  static const String InsertRunner = '/postRecord';
+  static const String InsertRunner = '/postRecordOnWeb';
   static const String contact = '/getContact';
   static const String history = '/getHistory';
   static const String uploadImageRunner =

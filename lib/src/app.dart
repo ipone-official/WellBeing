@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wellbeing/src/Pages/Runner/record_page.dart';
 import 'package:wellbeing/src/Pages/login/login_page.dart';
 import 'package:wellbeing/src/bloc/User/user_bloc.dart';
 import 'package:wellbeing/src/bloc/auth/auth_bloc.dart';
@@ -80,7 +81,7 @@ class App extends StatelessWidget {
         final prefs = snapshot.data!;
         final token = prefs.getString(NetworkAPI.token);
         return token == null ? LoginPage() : HomePage();
-        //  return token == null ? HomePage() : HomePage();
+        //  return token == null ? RecordPage() : HomePage();
       },
     );
   }

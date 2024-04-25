@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,6 +38,9 @@ class RecordPage extends StatefulWidget {
 }
 
 class _RecordPageState extends State<RecordPage> {
+  Uint8List webImage = Uint8List(8);
+  String?  img64;
+  String?  txtImg64;
   File? _imageFile;
   final _picker = ImagePicker();
   final TextEditingController _Recode = TextEditingController();
@@ -651,6 +656,7 @@ class _RecordPageState extends State<RecordPage> {
                     _showContent = false;
                     _imageFile = null;
                     _Recode.text = '';
+                    webImage = Uint8List(8);
                   });
                 }
                 Navigator.pop(context);
@@ -681,7 +687,7 @@ class _RecordPageState extends State<RecordPage> {
             ],
           ),
           width: MediaQuery.of(context).size.width * 0.95,
-          height: MediaQuery.of(context).size.height * 0.60,
+          height: MediaQuery.of(context).size.height * 0.70,
           child: Column(
             children: [
               Padding(
@@ -749,7 +755,7 @@ class _RecordPageState extends State<RecordPage> {
                           .add(RecordRunnerEventSubmit(
                             employeeId: employeeId,
                             record: _Recode.text,
-                            image: _imageFile,
+                            image: img64.toString(),
                           ));
                     },
                     child: Text(
@@ -810,10 +816,10 @@ class _RecordPageState extends State<RecordPage> {
             borderRadius: BorderRadius.circular(5.0),
             child: Center(
               child: SizedBox(
-                height: 320,
-                width: 320,
-                child: Image.file(
-                  _imageFile!,
+                height: 300,
+                width: 300,
+                child: Image.memory(
+                  webImage,
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: double.infinity,
@@ -894,20 +900,31 @@ class _RecordPageState extends State<RecordPage> {
   }
 
   void _pickImage(ImageSource source) async {
-    _picker
+   XFile? image = await _picker
         .pickImage(
       source: source,
       imageQuality: 100,
       maxHeight: 1920,
       maxWidth: 1080,
-    )
-        .then((file) {
-      if (file != null) {
-        _cropImage(file.path);
+    );
+      if (image != null) {
+        var f = await image.readAsBytes();
+        setState(() {
+          img64 = "data:image/png;base64,"+base64Encode(f);
+          webImage = f;
+          _imageFile = File('a');
+        });
+      } else {
+        const Text('Something went wrong.');
       }
-    }).catchError((error) {
-      //todo
-    });
+    //     .then((file) {
+    //   if (file != null) {
+    //     _imageFile = File(file.path);
+    //     // _cropImage(file.path);
+    //   }
+    // }).catchError((error) {
+    //   //todo
+    // });
   }
 
   void _cropImage(String filePath) async {

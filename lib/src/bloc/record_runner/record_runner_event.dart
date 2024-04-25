@@ -14,7 +14,7 @@ class RecordRunnerEventSubmit extends RecordRunnerEvent {
 
   final String? employeeId;
   final String? record;
-  final File? image;
+  final String? image;
 
   const RecordRunnerEventSubmit({
     this.employeeId,

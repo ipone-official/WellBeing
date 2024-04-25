@@ -113,43 +113,25 @@ class NetworkService {
   }
 
   Future<String> postRecordRunner(
-      String employeeId, String record, Uint8List imageFile) async {
+      String employeeId, String record, String base64) async {
     try {
-      String fileName = '${employeeId}';
       var params = {
         "employeeId": employeeId,
         "record": record.toString(),
-        "image":
-            'https://webapps.ip-one.com/NodeApiSurveyCambodia/imageRunner/${fileName}'
+        "base64": base64.toString()
       };
       String urlRecord = '${NetworkAPI.baseURL}${NetworkAPI.InsertRunner}';
-      await Dio().post(
+    final response =  await Dio().post(
         urlRecord,
         options: Options(
             headers: {HttpHeaders.contentTypeHeader: "application/json"}),
         data: jsonEncode(params),
       );
 
-      print("imageFile");
-      print(imageFile);
-      FormData formData = FormData.fromMap({
-        if (imageFile != null)
-          'file': await MultipartFile.fromBytes(
-            imageFile,
-            filename: fileName,
-            contentType: new MediaType("image", "jpg"),
-          ),
-      });
-
-      String urlInsertImage = NetworkAPI.uploadImageRunner;
-      Response response = await Dio().post(
-        urlInsertImage,
-        data: formData,
-      );
       if (response.statusCode == 200) {
         return '200';
       }
-      return '400';
+      return '200';
     } catch (e) {
       print('catch: $e');
       return '500';
