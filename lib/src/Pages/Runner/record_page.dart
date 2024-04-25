@@ -51,7 +51,7 @@ class _RecordPageState extends State<RecordPage> {
     Asset.other,
   ];
   final List<String> _titleOther = <String>[
-    'ข้อมูลส่วนตัว',
+    // 'ข้อมูลส่วนตัว',
     'ประวัติ',
     'ติดต่อ'
   ];
@@ -136,7 +136,7 @@ class _RecordPageState extends State<RecordPage> {
           ],
         ),
         width: MediaQuery.of(context).size.width * 0.95,
-        height: MediaQuery.of(context).size.height * 0.3, // ปรับขนาด
+        height: MediaQuery.of(context).size.height * 0.19, // ปรับขนาด
       ),
       SizedBox(height: MediaQuery.of(context).size.height * 0.020),
       InkWell(
@@ -207,9 +207,9 @@ class _RecordPageState extends State<RecordPage> {
       itemCount: _titleOther.length,
       itemBuilder: (context, index) => InkWell(
           onTap: () {
-            if (index == 1) {
+            if (index == 0) {
               Navigator.pushNamed(context, AppRoute.history);
-            } else if (index == 2) {
+            } else if (index == 1) {
               Navigator.pushNamed(context, AppRoute.contact);
             }
           },

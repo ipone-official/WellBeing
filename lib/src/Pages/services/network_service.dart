@@ -113,9 +113,9 @@ class NetworkService {
   }
 
   Future<String> postRecordRunner(
-      String employeeId, String record, Uint8List imageFile) async {
+      String employeeId, String record, File imageFile) async {
     try {
-      String fileName = '${employeeId}';
+          String fileName = '${employeeId}_${imageFile.path.split('/').last}';
       var params = {
         "employeeId": employeeId,
         "record": record.toString(),
@@ -134,8 +134,8 @@ class NetworkService {
       print(imageFile);
       FormData formData = FormData.fromMap({
         if (imageFile != null)
-          'file': await MultipartFile.fromBytes(
-            imageFile,
+          'file': await MultipartFile.fromFile(
+                      imageFile.path,
             filename: fileName,
             contentType: new MediaType("image", "jpg"),
           ),

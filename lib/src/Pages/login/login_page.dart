@@ -18,7 +18,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  int count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Color.fromRGBO(0, 127, 196, 100),
         body: Column(
           children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.11),
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: SizedBox.fromSize(
@@ -34,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
                       0.13), // Image radius
                   child: Image.asset(Asset.LogoAppImage)),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.07),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -42,18 +41,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            // Center(
-            //   child: Column(
-            //     children: [
-            //       Text(
-            //         "©2024 I.P.One Co., Ltd. All rights reserved.",
-            //         style: TextStyle(
-            //             color: Colors.white,
-            //             fontSize: MediaQuery.of(context).size.width * 0.030),
-            //       )
-            //     ],
-            //   ),
-            // )
           ],
         ));
   }
@@ -68,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       child: Padding(
-        padding: const EdgeInsets.only(top: 20.0, left: 30, right: 30),
+        padding: const EdgeInsets.only(left: 30, right: 30),
         child: Column(
           children: [
             Container(
@@ -80,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               width: MediaQuery.of(context).size.width * 0.95,
-              height: MediaQuery.of(context).size.height * 0.35,
+              height: MediaQuery.of(context).size.height * 0.28,
               child: Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: Column(
@@ -152,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(
                                 color: Color.fromARGB(255, 255, 255, 255),
                                 fontSize:
-                                    MediaQuery.of(context).size.width * 0.025),
+                                    MediaQuery.of(context).size.height * 0.019),
                           ),
                         );
                       },
@@ -162,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
              SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.19,
+                      height: MediaQuery.of(context).size.height * 0.26,
                     ),
             Center(
               child: Column(
