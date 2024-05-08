@@ -17,7 +17,6 @@ class HomeHeader extends StatefulWidget {
 
 class _HomeHeaderState extends State<HomeHeader> {
   String? employeeId;
-  String? fullName;
   var items = <Users>[];
   @override
   void initState() {
@@ -28,16 +27,53 @@ class _HomeHeaderState extends State<HomeHeader> {
   void getStorage() async {
     final prefs = await SharedPreferences.getInstance();
     employeeId = prefs.getString(NetworkAPI.token);
-    // final storage = FlutterSecureStorage();
-    // fullName = await storage.read(key: fullName);
-    setState(() {});
-    print("employeeId");
-    print(employeeId);
+    context.read<UserBloc>().add(UserEventFetch(employeeId));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Container(child: BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        items = state.users;
+        return Container(
+                    height: MediaQuery.of(context).size.width * 0.13,
+                    child: _buildContentHeader(items),
+                  );
+        // RefreshIndicator(
+        //     onRefresh: () async =>
+        //         context.read<UserBloc>().add(UserEventFetch(employeeId)),
+        //     child: state.status == FetchStatusUser.fetching
+        //         ?  Container(
+        //                   alignment: Alignment.center,
+        //                   height: MediaQuery.of(context).size.width * 0.13,
+        //                   child: _loading())
+        //         : Container(
+        //             height: MediaQuery.of(context).size.width * 0.13,
+        //             child: _buildContentHeader(items),
+        //           ));
+      },
+    ));
+  }
+  Widget _loading() {
+    return Center(
+      child: LoadingAnimationWidget.twistingDots(
+        leftDotColor: Color.fromRGBO(
+          0,
+          127,
+          196,
+          1,
+        ),
+        rightDotColor: Color.fromRGBO(248, 200, 73, 1),
+        size: 50,
+      ),
+    );
+  }
+
+  Widget _buildContentHeader(List<Users> users) {
+    return ListView.builder(
+        itemCount: users.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -48,7 +84,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                   child: Row(
                     children: [
                       Text(
-                        "${employeeId}",
+                        "${users[index].employeeNameTh}",
                         // 'Mr. Piyapong Sablabloy',
                         style: TextStyle(
                             color: Colors.white,
@@ -66,7 +102,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                   child: Row(
                     children: [
                       Text(
-                        'รหัสพนักงาน ${fullName}',
+                        'รหัสพนักงาน ${users[index].employeeId}',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -79,12 +115,6 @@ class _HomeHeaderState extends State<HomeHeader> {
               ],
             ),
           );
-  }
-  Widget _buildContentHeader(List<Users> users) {
-    return ListView.builder(
-        itemCount: users.length,
-        itemBuilder: (BuildContext context, int index) {
-          
         });
   }
 }

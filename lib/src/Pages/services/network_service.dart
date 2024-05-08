@@ -58,15 +58,20 @@ class NetworkService {
 
   Future<String> Login(String userId, String password) async {
     try {
-      var params = {"userId": userId, "password": password};
-      String url = '${NetworkAPI.baseURL}${NetworkAPI.login}';
-
+      // var params = {"userId": userId, "password": password};
+      // String url = '${NetworkAPI.baseURL}${NetworkAPI.login}';
+      var params = {"username": "piyapong.s", "password": "piy@pong05"};
+      String url = '${NetworkAPI.loginAd}';
+      
       Response response = await _dio.post(
         url,
         options: Options(
             headers: {HttpHeaders.contentTypeHeader: "application/json"}),
         data: jsonEncode(params),
       );
+      print("========response========");
+      print(response);
+      print(response.data.authentication);
       if (response.statusCode == 200) {
         print("Sucess");
         return '200';

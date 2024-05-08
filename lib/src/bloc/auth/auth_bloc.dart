@@ -33,7 +33,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(state.copyWith(status: LoginStatus.success));
         final prefs = await SharedPreferences.getInstance();
         prefs.setString(NetworkAPI.token, userId);
-        // prefs.setString(NetworkAPI.username, username);
       } else {
         emit(state.copyWith(
             status: LoginStatus.failed,
