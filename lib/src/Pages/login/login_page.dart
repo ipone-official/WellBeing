@@ -7,7 +7,6 @@ import 'package:wellbeing/src/Pages/app_routes.dart';
 import 'package:wellbeing/src/Pages/models/UserAd.dart';
 import 'package:wellbeing/src/Pages/models/user_class.dart';
 import 'package:wellbeing/src/Pages/provider/loginAd_provider.dart';
-import 'package:wellbeing/src/Pages/services/constants.dart';
 import 'package:wellbeing/src/app.dart';
 import 'package:wellbeing/src/bloc/auth/auth_bloc.dart';
 import 'package:wellbeing/src/constants/asset.dart';
@@ -173,10 +172,6 @@ class _LoginPageState extends State<LoginPage> {
       if (_userAd.authentication) {
         final prefs = await SharedPreferences.getInstance();
         prefs.setString(NetworkAPI.token, _userAd.empId);
-        // final storage = FlutterSecureStorage();
-        // storage.write(key: fullName, value: _userAd.name);
-        // var fullNames = await storage.read(key: fullName);
-        // print(fullNames);
         Navigator.pushReplacementNamed(context, AppRoute.home);
       } else {
         _showAlert("ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง!", context, "error");

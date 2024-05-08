@@ -391,10 +391,10 @@ class _RecordPageState extends State<RecordPage> {
                   child: state.status == FetchRecordMeStatus.fetching
                       ? Container(
                           alignment: Alignment.center,
-                          height: MediaQuery.of(context).size.width * 0.27,
+                          height: MediaQuery.of(context).size.width * 0.26,
                           child: _loading())
                       : Container(
-                          height: MediaQuery.of(context).size.width * 0.27,
+                          height: MediaQuery.of(context).size.width * 0.26,
                           child: _buildMeRunner(rankMeRunners)));
             },
           )),
@@ -403,7 +403,7 @@ class _RecordPageState extends State<RecordPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 15, top: 10),
+                  padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
                   child: Row(
                     children: [
                       Text(
@@ -426,11 +426,11 @@ class _RecordPageState extends State<RecordPage> {
                             ? Container(
                                 alignment: Alignment.center,
                                 height:
-                                    MediaQuery.of(context).size.height * 0.47,
+                                    MediaQuery.of(context).size.height * 0.44,
                                 child: _loading())
                             : Container(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.47,
+                                    MediaQuery.of(context).size.height * 0.44,
                                 child: _buildTopRankRunner(rankRunners)));
                   },
                 )),
@@ -563,7 +563,7 @@ class _RecordPageState extends State<RecordPage> {
                         child: SizedBox.fromSize(
                             size: Size.fromRadius(
                                 MediaQuery.of(context).size.width *
-                                    0.065), // Image radius
+                                    0.060), // Image radius
                             child: Image.asset(
                               Asset.RunnerImage,
                             ))),
