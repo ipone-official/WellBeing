@@ -35,18 +35,23 @@ class _HomeHeaderState extends State<HomeHeader> {
     return Container(child: BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
         items = state.users;
-        return RefreshIndicator(
-            onRefresh: () async =>
-                context.read<UserBloc>().add(UserEventFetch(employeeId)),
-            child: state.status == FetchStatusUser.fetching
-                ?  Container(
-                          alignment: Alignment.center,
-                          height: MediaQuery.of(context).size.width * 0.13,
-                          child: _loading())
-                : Container(
+        return Container(
                     height: MediaQuery.of(context).size.width * 0.13,
                     child: _buildContentHeader(items),
-                  ));
+                  );
+        // RefreshIndicator(
+        //     onRefresh: () async =>
+        //         context.read<UserBloc>().add(UserEventFetch(employeeId)),
+        //     child: state.status == FetchStatusUser.fetching
+        //         ?  Container(
+        //                   alignment: Alignment.center,
+        //                   height: MediaQuery.of(context).size.width * 0.13,
+        //                   child: _loading())
+        //         : Container(
+        //             height: MediaQuery.of(context).size.width * 0.13,
+        //             child: _buildContentHeader(items),
+        //           )
+        //           );
       },
     ));
   }

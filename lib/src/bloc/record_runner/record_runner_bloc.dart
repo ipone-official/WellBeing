@@ -12,7 +12,7 @@ class RecordRunnerBloc extends Bloc<RecordRunnerEvent, RecordRunnerState> {
       final _imageFile = event.image!;
 
       emit(state.copyWith(status: SubmitStatus.submitting));
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(seconds: 3));
       try {
         String result;
         result = await NetworkService()
