@@ -11,15 +11,12 @@ import 'package:wellbeing/src/bloc/record/record_bloc.dart';
 import 'package:wellbeing/src/bloc/record_runner/record_runner_bloc.dart';
 import 'package:wellbeing/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl/intl.dart';
 import 'Pages/app_routes.dart';
 import 'Pages/home/home_page.dart';
 import 'constants/network_api.dart';
 import 'package:logger/logger.dart';
 
 final navigatorState = GlobalKey<NavigatorState>();
-final formatCurrency = NumberFormat('#,###.000');
-final formatNumber = NumberFormat('#,###');
 
 final logger = Logger(
   printer: PrettyPrinter(
@@ -70,7 +67,6 @@ class App extends StatelessWidget {
   }
 
   _buildInitialPage() {
-    print("Login");
     return FutureBuilder(
       future: SharedPreferences.getInstance(),
       builder: (context, snapshot) {

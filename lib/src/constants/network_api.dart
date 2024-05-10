@@ -3,10 +3,8 @@
 class NetworkAPI {
   static const String baseURL =
       'https://webapps.ip-one.com/WebAPIRunner/Runner/v1';
-
-  // static const String baseURL =
-  //     'https://192.168.253.86/Runner/v1';
-  static const String loginAd = 'https://webapps.ip-one.com/AdsControl/Ads/v1/ADsAuthentication';
+  static const String loginAd =
+      'https://webapps.ip-one.com/AdsControl/Ads/v1/ADsAuthenticationMobile';
   static const String login = '/postLogin';
   static const String rankRunner = '/getRankRunner';
   static const String meRunner = '/getMeRunner';

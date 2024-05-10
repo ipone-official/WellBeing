@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wellbeing/src/Pages/app_routes.dart';
 import 'package:wellbeing/src/Pages/models/UserAd.dart';
-import 'package:wellbeing/src/Pages/models/user_class.dart';
 import 'package:wellbeing/src/Pages/provider/loginAd_provider.dart';
 import 'package:wellbeing/src/app.dart';
-import 'package:wellbeing/src/bloc/auth/auth_bloc.dart';
 import 'package:wellbeing/src/constants/asset.dart';
 import 'package:wellbeing/src/constants/network_api.dart';
 import 'package:wellbeing/src/widgets/custom_flushbar.dart';
@@ -35,10 +32,10 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(20),
               child: SizedBox.fromSize(
                   size: Size.fromRadius(MediaQuery.of(context).size.height *
-                      0.13), // Image radius
+                      0.12), // Image radius
                   child: Image.asset(Asset.LogoAppImage)),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.045),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -64,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             width: MediaQuery.of(context).size.width * 0.95,
-            height: MediaQuery.of(context).size.height * 0.28,
+            // height: MediaQuery.of(context).size.height * 0.28,
             child: Padding(
               padding: const EdgeInsets.all(18.0),
               child: Column(
@@ -147,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.26,
+            height: MediaQuery.of(context).size.height * 0.30,
           ),
           Center(
             child: Column(
@@ -169,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
   void authenUser(String userid, String password) {
     loginAdProvider().getUser(userid, password).then((value) async {
       UserAd _userAd = value;
-      if (_userAd.authentication) {
+      if (_userAd.authentication && !_userAd.locked) {
         final prefs = await SharedPreferences.getInstance();
         prefs.setString(NetworkAPI.token, _userAd.empId);
         Navigator.pushReplacementNamed(context, AppRoute.home);
