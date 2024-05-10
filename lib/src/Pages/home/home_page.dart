@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:intl/intl.dart';
 import 'package:wellbeing/src/bloc/auth/auth_bloc.dart';
+import 'package:wellbeing/src/bloc/auth/auth_event.dart';
 import 'package:wellbeing/src/constants/asset.dart';
 
 import 'components/categories.dart';

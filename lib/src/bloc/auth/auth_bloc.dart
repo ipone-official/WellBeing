@@ -1,44 +1,31 @@
 import 'dart:convert';
 
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wellbeing/src/Pages/app_routes.dart';
-import 'package:wellbeing/src/Pages/models/user_class.dart';
 import 'package:wellbeing/src/Pages/services/network_service.dart';
 import 'package:wellbeing/src/app.dart';
-import 'package:wellbeing/src/constants/network_api.dart';
+import 'package:wellbeing/src/bloc/auth/auth_event.dart';
+import 'package:wellbeing/src/bloc/auth/auth_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../widgets/custom_flushbar.dart';
-
-part 'auth_event.dart';
-part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthState()) {
     on<AuthEventLogin>((event, emit) async {
+      emit(state.copyWith(status: LoginStatus.success, userAd: []));
       emit(state.copyWith(status: LoginStatus.fetching));
       // await Future.delayed(Duration(milliseconds: 1000));
       final String userId = event.payload.username;
       final String password = event.payload.password;
-      String result;
-      result = await NetworkService().Login(userId, password);
-      // if (username == 'admin' && password == '1234') {
-      //   final prefs = await SharedPreferences.getInstance();
-      //   prefs.setString(NetworkAPI.token, "12341241243134134");
-      //   prefs.setString(NetworkAPI.username, username);
-      //   emit(state.copyWith(status: LoginStatus.success));
-      if (result == '200') {
-        emit(state.copyWith(status: LoginStatus.success));
-        final prefs = await SharedPreferences.getInstance();
-        prefs.setString(NetworkAPI.token, userId);
-        // prefs.setString(NetworkAPI.username, username);
+      final userAd = await NetworkService().Login(userId, password);
+      if(userAd[0].authentication){
+          emit(state.copyWith(status: LoginStatus.success, userAd: userAd));
       } else {
-        emit(state.copyWith(
-            status: LoginStatus.failed,
-            dialogMessage: "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง!"));
+         emit(state.copyWith(status: LoginStatus.failed, userAd: userAd));
       }
+      
+     
     });
     // Logout
     on<AuthEventLogout>((event, emit) async {

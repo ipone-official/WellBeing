@@ -81,7 +81,6 @@ class App extends StatelessWidget {
         final prefs = snapshot.data!;
         final token = prefs.getString(NetworkAPI.token);
         return token == null ? LoginPage() : HomePage();
-        //  return token == null ? RecordPage() : HomePage();
       },
     );
   }

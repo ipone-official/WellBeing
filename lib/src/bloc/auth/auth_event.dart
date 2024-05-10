@@ -1,4 +1,5 @@
-part of 'auth_bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:wellbeing/src/Pages/models/user_class.dart';
 
 abstract class AuthEvent extends Equatable {
   const AuthEvent();

@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:universal_io/io.dart';
+import 'package:wellbeing/src/Pages/models/UserAd.dart';
 import 'package:wellbeing/src/Pages/models/contact.dart';
 import 'package:wellbeing/src/Pages/models/history_runner.dart';
 import 'package:wellbeing/src/Pages/models/rank_runner.dart';
@@ -56,26 +57,20 @@ class NetworkService {
   //   };
   // }
 
-  Future<String> Login(String userId, String password) async {
-    try {
-      var params = {"userId": userId, "password": password};
-      String url = '${NetworkAPI.baseURL}${NetworkAPI.login}';
+  Future<List<UserAd>> Login(String userId, String password) async {
+      var params = {"username": userId, "password": password};
+      String url = '${NetworkAPI.loginAd}';
 
-      Response response = await _dio.post(
+      final response = await _dio.post(
         url,
         options: Options(
             headers: {HttpHeaders.contentTypeHeader: "application/json"}),
         data: jsonEncode(params),
       );
-      if (response.statusCode == 200) {
-        print("Sucess");
-        return '200';
-      }
-      return '200';
-    } catch (e) {
-      print('catch: $e');
-      return '500';
-    }
+      print("print(response);");
+      print(response);
+    return userAdFromJson(jsonEncode(response.data));
+  
   }
 
   Future<List<Users>> getUser(String employeeId) async {

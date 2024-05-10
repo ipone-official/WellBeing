@@ -14,6 +14,7 @@ import 'package:wellbeing/src/Pages/app_routes.dart';
 import 'package:wellbeing/src/Pages/home/components/home_header.dart';
 import 'package:wellbeing/src/Pages/models/rank_runner.dart';
 import 'package:wellbeing/src/bloc/auth/auth_bloc.dart';
+import 'package:wellbeing/src/bloc/auth/auth_event.dart';
 import 'package:wellbeing/src/bloc/me_recode/record_me_bloc.dart';
 import 'package:wellbeing/src/bloc/record/record_bloc.dart';
 import 'package:wellbeing/src/bloc/record/record_event.dart';
@@ -408,7 +409,7 @@ class _RecordPageState extends State<RecordPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 15, top: 10),
+                 padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
                   child: Row(
                     children: [
                       Text(
@@ -431,11 +432,11 @@ class _RecordPageState extends State<RecordPage> {
                             ? Container(
                                 alignment: Alignment.center,
                                 height:
-                                    MediaQuery.of(context).size.height * 0.47,
+                                    MediaQuery.of(context).size.height * 0.40,
                                 child: _loading())
                             : Container(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.47,
+                                    MediaQuery.of(context).size.height * 0.40,
                                 child: _buildTopRankRunner(rankRunners)));
                   },
                 )),
@@ -687,7 +688,7 @@ class _RecordPageState extends State<RecordPage> {
             ],
           ),
           width: MediaQuery.of(context).size.width * 0.95,
-          height: MediaQuery.of(context).size.height * 0.70,
+          // height: MediaQuery.of(context).size.height * 0.70,
           child: Column(
             children: [
               Padding(

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:wellbeing/src/Pages/app_routes.dart';
 import 'package:wellbeing/src/Pages/models/users.dart';
 import 'package:wellbeing/src/bloc/User/user_bloc.dart';
 import 'package:wellbeing/src/bloc/user/user_event.dart';
@@ -27,7 +28,14 @@ class _HomeHeaderState extends State<HomeHeader> {
   void getStorage() async {
     final prefs = await SharedPreferences.getInstance();
     employeeId = prefs.getString(NetworkAPI.token);
-    context.read<UserBloc>().add(UserEventFetch(employeeId));
+    print("employeeId home_header");
+    print(employeeId);
+    if(employeeId != null) {
+        context.read<UserBloc>().add(UserEventFetch(employeeId));
+    } else {
+        Navigator.pushReplacementNamed(context, AppRoute.login);
+    }
+    
   }
 
   @override
@@ -35,18 +43,23 @@ class _HomeHeaderState extends State<HomeHeader> {
     return Container(child: BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
         items = state.users;
-        return RefreshIndicator(
-            onRefresh: () async =>
-                context.read<UserBloc>().add(UserEventFetch(employeeId)),
-            child: state.status == FetchStatusUser.fetching
-                ?  Container(
-                          alignment: Alignment.center,
-                          height: MediaQuery.of(context).size.width * 0.13,
-                          child: _loading())
-                : Container(
+      return Container(
                     height: MediaQuery.of(context).size.width * 0.13,
                     child: _buildContentHeader(items),
-                  ));
+                  );
+        // RefreshIndicator(
+        //     onRefresh: () async =>
+        //         context.read<UserBloc>().add(UserEventFetch(employeeId)),
+        //     child: state.status == FetchStatusUser.fetching
+        //         ?  Container(
+        //                   alignment: Alignment.center,
+        //                   height: MediaQuery.of(context).size.width * 0.13,
+        //                   child: _loading())
+        //         : Container(
+        //             height: MediaQuery.of(context).size.width * 0.13,
+        //             child: _buildContentHeader(items),
+        //           )
+        //           );
       },
     ));
   }
