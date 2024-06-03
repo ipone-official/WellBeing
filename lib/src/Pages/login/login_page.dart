@@ -118,10 +118,6 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                     TextField(
                       keyboardType: TextInputType.text,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp('[A-Za-z/./@!%*?&^#\$+-/=/0-9]')),
-                      ],
                       maxLength: 20,
                       controller: _passwordController,
                       obscureText: true,
