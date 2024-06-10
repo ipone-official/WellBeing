@@ -23,6 +23,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _obscured = true;
 
   @override
   Widget build(BuildContext context) {
@@ -117,18 +118,34 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                     TextField(
-                      keyboardType: TextInputType.text,
-                      maxLength: 20,
-                      controller: _passwordController,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        counterText: '',
-                        border: InputBorder.none,
-                        hintText: 'รหัสผ่าน',
-                        labelText: 'รหัสผ่าน',
-                        icon: Icon(Icons.lock),
+                    keyboardType: TextInputType.text,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[A-Za-z./@!%*?&^#\$+=0-9\()_,;:]'),
+                      ),
+                    ],
+                    maxLength: 20,
+                    controller: _passwordController,
+                    obscureText: _obscured,
+                    decoration: InputDecoration(
+                      counterText: '',
+                      border: InputBorder.none,
+                      hintText: 'รหัสผ่าน',
+                      labelText: 'รหัสผ่าน',
+                      icon: const Icon(Icons.lock),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          !_obscured ? Icons.visibility : Icons.visibility_off,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscured = !_obscured;
+                          });
+                        },
                       ),
                     ),
+                  ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.03,
                     ),
