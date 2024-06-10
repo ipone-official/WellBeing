@@ -20,6 +20,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _obscured = true;
 
   @override
   Widget build(BuildContext context) {
@@ -84,20 +85,33 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                  TextField(
+             TextField(
                     keyboardType: TextInputType.text,
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp('[A-Za-z/./@!%*?&^#\$+-/=/0-9]')),
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[A-Za-z./@!%*?&^#\$+=0-9\()_,;:]'),
+                      ),
                     ],
                     maxLength: 20,
                     controller: _passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
+                    obscureText: _obscured,
+                    decoration: InputDecoration(
                       counterText: '',
                       border: InputBorder.none,
                       hintText: 'รหัสผ่าน',
                       labelText: 'รหัสผ่าน',
-                      icon: Icon(Icons.lock),
+                      icon: const Icon(Icons.lock),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          !_obscured ? Icons.visibility : Icons.visibility_off,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscured = !_obscured;
+                          });
+                        },
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -150,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 Text(
-                  "©2024 I.P.One Co., Ltd. All rights reserved.",
+                  "©2024 I.P.One Co., Ltd. All rights reserved. V1.4.1",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: MediaQuery.of(context).size.width * 0.030),
