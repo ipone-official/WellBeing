@@ -24,7 +24,7 @@ Items Runner = new Items(
     title: "Run to The Moon",
     subtitle: "วิ่งให้ถึงดวงจันทร์",
     event: AppRoute.record,
-    img: Asset.LogoRunnerImage);
+    img: Asset.NewLogoRunnerImage);
 
 Items commingsoon = new Items(
     title: "พบกันเร็ว ๆ นี้", subtitle: "", event: '', img: Asset.App3);

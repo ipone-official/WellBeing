@@ -3,6 +3,7 @@ class Asset {
   static const assetIcon = 'assets/icons';
   static const LogoAppImage = '$assetImage/Well-being.png';
   static const LogoRunnerImage = '$assetImage/Well-being-festival.jpg';
+  static const NewLogoRunnerImage = '$assetImage/RunToTheMoon.png';
   static const RunnerImage4 = '$assetImage/APP_1.png';
   static const RunnerImage = '$assetImage/APP_1_nonBG.png';
   static const RunnerApp4 = '$assetImage/APP_4_nonBG.png';
