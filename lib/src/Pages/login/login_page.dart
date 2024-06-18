@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                   TextField(
                     keyboardType: TextInputType.text,
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp('[a-z .]')),
+                      FilteringTextInputFormatter.allow(RegExp('[a-z . 0-9]')),
                     ],
                     maxLength: 20,
                     controller: _usernameController,
@@ -164,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 Text(
-                  "©2024 I.P.One Co., Ltd. All rights reserved. V1.4.1",
+                  "©2024 I.P.One Co., Ltd. All rights reserved. V1.4.2",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: MediaQuery.of(context).size.width * 0.030),
