@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                     TextField(
                       keyboardType: TextInputType.text,
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[a-z/.]')),
+                        FilteringTextInputFormatter.allow(RegExp('[a-z/. 0-9]')),
                       ],
                       maxLength: 20,
                       controller: _usernameController,
