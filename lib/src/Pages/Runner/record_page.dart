@@ -26,6 +26,7 @@ import 'package:wellbeing/src/constants/asset.dart';
 import 'package:wellbeing/src/constants/network_api.dart';
 import 'package:wellbeing/src/widgets/custom_flushbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:image/image.dart' as img;
 
 import '../../bloc/me_recode/record_me_event.dart';
 import '../../bloc/me_recode/record_me_state.dart';
@@ -781,6 +782,8 @@ class _RecordPageState extends State<RecordPage> {
                         _showContent = false;
                         _imageFile = null;
                         _Recode.text = '';
+                        img64 = '';
+                        txtImg64 = '';
                       });
                     },
                     child: Text(
@@ -899,33 +902,38 @@ class _RecordPageState extends State<RecordPage> {
       },
     );
   }
+  Future<Uint8List?> _resizeImage(Uint8List data, int width, int height) async {
+    img.Image image = img.decodeImage(data)!;
+    img.Image resizedImage = img.copyResize(image, width: width, height: height);
+    return Uint8List.fromList(img.encodePng(resizedImage));
+  }
+
 
   void _pickImage(ImageSource source) async {
-   XFile? image = await _picker
-        .pickImage(
-      source: source,
-      imageQuality: 100,
-      maxHeight: 1920,
-      maxWidth: 1080,
-    );
-      if (image != null) {
-        var f = await image.readAsBytes();
-        setState(() {
-          img64 = "data:image/png;base64,"+base64Encode(f);
-          webImage = f;
-          _imageFile = File('a');
-        });
-      } else {
-        const Text('Something went wrong.');
-      }
-    //     .then((file) {
-    //   if (file != null) {
-    //     _imageFile = File(file.path);
-    //     // _cropImage(file.path);
-    //   }
-    // }).catchError((error) {
-    //   //todo
-    // });
+    XFile? image = await _picker.pickImage(source: source, imageQuality: 100);
+
+    if (image != null) {
+      var f = await image.readAsBytes();
+
+      // Resize image to 190x190
+      Uint8List? resizedSmallBytes = await _resizeImage(f, 190, 190);
+
+      // Resize image to 1080x1920
+      Uint8List? resizedLargeBytes = await _resizeImage(f, 480, 640);
+
+      setState(() {
+        if (resizedSmallBytes != null) {
+          img64 = "data:image/png;base64," + base64Encode(resizedSmallBytes);
+        }
+        webImage = resizedLargeBytes!;
+        _imageFile = File('a');
+      });
+
+      print("image and image1 processed");
+      print(resizedLargeBytes);
+    } else {
+      print('Something went wrong.');
+    }
   }
 
   void _cropImage(String filePath) async {
