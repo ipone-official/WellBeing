@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:wellbeing/src/bloc/auth/auth_bloc.dart';
 import 'package:wellbeing/src/bloc/auth/auth_event.dart';
 import 'package:wellbeing/src/constants/asset.dart';
@@ -111,74 +112,103 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             InkWell(
                               onTap: () {
-                                // Url link
+                                // Open URL
+                                // launch('https://your-url.com/page1');
                               },
                               child: Image.network(
                                 'https://webapps.ip-one.com/news/news01.png',
                                 errorBuilder: (context, error, stackTrace) {
                                   return Container(
-                                      alignment: Alignment.center,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.30,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.30,
-                                      child: Text("ไม่พบรูปภาพ"));
+                                    alignment: Alignment.center,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.30,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.30,
+                                    child: Text("ไม่พบรูปภาพ"),
+                                  );
                                 },
                                 fit: BoxFit.contain,
                               ),
                             ),
-                            Image.network(
-                              'https://webapps.ip-one.com/news/news02.png',
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
+                            InkWell(
+                              onTap: () {
+                                // Open URL
+                                // launch('https://your-url.com/page2');
+                              },
+                              child: Image.network(
+                                'https://webapps.ip-one.com/news/news02.png',
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
                                     alignment: Alignment.center,
                                     width: MediaQuery.of(context).size.width *
                                         0.30,
                                     height: MediaQuery.of(context).size.height *
                                         0.30,
-                                    child: Text("ไม่พบรูปภาพ"));
-                              },
-                              fit: BoxFit.contain,
+                                    child: Text("ไม่พบรูปภาพ"),
+                                  );
+                                },
+                                fit: BoxFit.contain,
+                              ),
                             ),
-                            Image.network(
-                              'https://webapps.ip-one.com/news/news03.png',
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
+                            InkWell(
+                              onTap: () {
+                                // Open URL
+                                // launch('https://your-url.com/page3');
+                              },
+                              child: Image.network(
+                                'https://webapps.ip-one.com/news/news03.png',
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
                                     alignment: Alignment.center,
                                     width: MediaQuery.of(context).size.width *
                                         0.30,
                                     height: MediaQuery.of(context).size.height *
                                         0.30,
-                                    child: Text("ไม่พบรูปภาพ"));
-                              },
-                              fit: BoxFit.contain,
+                                    child: Text("ไม่พบรูปภาพ"),
+                                  );
+                                },
+                                fit: BoxFit.contain,
+                              ),
                             ),
-                            Image.network(
-                              'https://webapps.ip-one.com/news/news04.png',
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
+                            InkWell(
+                              onTap: () {
+                                // Open URL
+                                launch('https://forms.office.com/r/Rr2gJ5XvWg');
+                              },
+                              child: Image.network(
+                                'https://webapps.ip-one.com/news/news04.png',
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
                                     alignment: Alignment.center,
                                     width: MediaQuery.of(context).size.width *
                                         0.30,
                                     height: MediaQuery.of(context).size.height *
                                         0.30,
-                                    child: Text("ไม่พบรูปภาพ"));
-                              },
-                              fit: BoxFit.contain,
+                                    child: Text("ไม่พบรูปภาพ"),
+                                  );
+                                },
+                                fit: BoxFit.contain,
+                              ),
                             ),
-                            Image.network(
-                              'https://webapps.ip-one.com/news/news05.png',
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
+                            InkWell(
+                              onTap: () {
+                                // Open URL
+                                // launch('https://your-url.com/page5');
+                              },
+                              child: Image.network(
+                                'https://webapps.ip-one.com/news/news05.png',
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
                                     alignment: Alignment.center,
                                     width: MediaQuery.of(context).size.width *
                                         0.30,
                                     height: MediaQuery.of(context).size.height *
                                         0.30,
-                                    child: Text("ไม่พบรูปภาพ"));
-                              },
-                              fit: BoxFit.contain,
+                                    child: Text("ไม่พบรูปภาพ"),
+                                  );
+                                },
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ],
                           // onPageChanged: (value) {
