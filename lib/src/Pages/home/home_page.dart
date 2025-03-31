@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Color.fromRGBO(0, 127, 196, 100),
       appBar: AppBar(
         // title: Text('Well-being', style: TextStyle(color: Color.fromRGBO(0, 127, 196, 100),)),
-        title: Text('I.P. ONE WELL-BEING',
+        title: Text('I.P. ONE HAPPY CLUB',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         automaticallyImplyLeading: false,
         actions: [

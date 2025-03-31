@@ -28,7 +28,7 @@ class _ContactPageState extends State<ContactPage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(0, 127, 196, 100),
       appBar: AppBar(
-        title: Text('I.P. ONE Run to The Moon',
+        title: Text('I.P. ONE RUNNING CLUB',
             //  style: TextStyle(color: Color.fromRGBO(0, 127, 196, 100),
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         automaticallyImplyLeading: false,

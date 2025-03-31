@@ -1,120 +1,95 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:wellbeing/src/Pages/models/users.dart';
-import 'package:wellbeing/src/bloc/User/user_bloc.dart';
-import 'package:wellbeing/src/bloc/user/user_event.dart';
-import 'package:wellbeing/src/bloc/user/user_state.dart';
-import 'package:wellbeing/src/constants/network_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wellbeing/src/Pages/services/network_service.dart';
+import 'package:wellbeing/src/bloc/user/user_cubit.dart';
+import 'package:wellbeing/src/constants/network_api.dart';
+import 'package:wellbeing/src/Pages/models/users.dart';
 
 class HomeHeader extends StatefulWidget {
+  const HomeHeader({super.key});
+
   @override
   State<HomeHeader> createState() => _HomeHeaderState();
 }
 
 class _HomeHeaderState extends State<HomeHeader> {
-  String? employeeId;
-  var items = <Users>[];
+  bool _hasTriedFetch = false;
+
   @override
-  void initState() {
-    getStorage();
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _tryFetchUser();
   }
 
-  void getStorage() async {
+  Future<void> _tryFetchUser() async {
+    if (_hasTriedFetch) return; // ไม่โหลดซ้ำ
+    _hasTriedFetch = true;
+
+    final user = context.read<UserCubit>().state;
+    if (user != null) return;
+
     final prefs = await SharedPreferences.getInstance();
-    employeeId = prefs.getString(NetworkAPI.token);
-    context.read<UserBloc>().add(UserEventFetch(employeeId));
+    final empId = prefs.getString(NetworkAPI.token);
+
+    if (empId != null) {
+      print("➡️ GET USER BY ID: $empId");
+      final users = await NetworkService().getUser(empId);
+      print("👥 USERS DATA: ${users.map((e) => e.toJson())}");
+
+      if (users.isNotEmpty) {
+        final user = users.first;
+        print("✅ SET USER: ${user.employeeNameTh}");
+        context.read<UserCubit>().setUser(user);
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: BlocBuilder<UserBloc, UserState>(
-      builder: (context, state) {
-        items = state.users;
-        return Container(
-                    height: MediaQuery.of(context).size.width * 0.13,
-                    child: _buildContentHeader(items),
-                  );
-        // RefreshIndicator(
-        //     onRefresh: () async =>
-        //         context.read<UserBloc>().add(UserEventFetch(employeeId)),
-        //     child: state.status == FetchStatusUser.fetching
-        //         ?  Container(
-        //                   alignment: Alignment.center,
-        //                   height: MediaQuery.of(context).size.width * 0.13,
-        //                   child: _loading())
-        //         : Container(
-        //             height: MediaQuery.of(context).size.width * 0.13,
-        //             child: _buildContentHeader(items),
-        //           ));
-      },
-    ));
-  }
-  Widget _loading() {
-    return Center(
-      child: LoadingAnimationWidget.twistingDots(
-        leftDotColor: Color.fromRGBO(
-          0,
-          127,
-          196,
-          1,
-        ),
-        rightDotColor: Color.fromRGBO(248, 200, 73, 1),
-        size: 50,
-      ),
-    );
-  }
+    return BlocBuilder<UserCubit, Users?>(
+      builder: (context, user) {
+        if (user == null) {
+          return Padding(
+            padding: const EdgeInsets.only(left: 16.0, top: 8),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "ไม่พบข้อมูลผู้ใช้งาน",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          );
+        }
 
-  Widget _buildContentHeader(List<Users> users) {
-    return ListView.builder(
-        itemCount: users.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
+        return Padding(
+          padding: const EdgeInsets.only(left: 16.0, top: 8),
+          child: Align(
+            alignment: Alignment.centerLeft,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.040,
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        "${users[index].employeeNameTh}",
-                        // 'Mr. Piyapong Sablabloy',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize:
-                                MediaQuery.of(context).size.width * 0.050),
-                      ),
-                    ],
+                Text(
+                  user.employeeNameTh,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: MediaQuery.of(context).size.width * 0.050,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.040,
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        'รหัสพนักงาน ${users[index].employeeId}',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize:
-                                MediaQuery.of(context).size.width * 0.030),
-                      ),
-                    ],
+                Text(
+                  'รหัสพนักงาน ${user.employeeId}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: MediaQuery.of(context).size.width * 0.030,
                   ),
                 ),
               ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }

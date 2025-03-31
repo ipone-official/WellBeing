@@ -83,12 +83,25 @@ class NetworkService {
     }
   }
 
-  Future<List<Users>> getUser(String employeeId) async {
-    String url =
-        '${NetworkAPI.baseURL}${NetworkAPI.getUser}?employeeId=${employeeId}';
+Future<List<Users>> getUser(String employeeId) async {
+  try {
+    final url = '${NetworkAPI.baseURL}${NetworkAPI.getUser}?employeeId=$employeeId';
+    print("📡 CALLING: $url");
+
     final response = await _dio.get(url);
-    return usersFromJson(jsonEncode(response.data));
+    print("📥 RESPONSE: ${response.data}");
+
+    final users = usersFromJson(jsonEncode(response.data));
+    print("✅ PARSED USERS: ${users.map((e) => e.toJson())}");
+
+    return users;
+  } catch (e) {
+    print("❌ ERROR getUser: $e");
+    return [];
   }
+}
+
+
 
   Future<List<RankRunner>> getRankRunner() async {
     String url = '${NetworkAPI.baseURL}${NetworkAPI.rankRunner}';

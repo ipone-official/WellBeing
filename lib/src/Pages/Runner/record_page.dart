@@ -79,7 +79,7 @@ class _RecordPageState extends State<RecordPage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(0, 127, 196, 100),
       appBar: AppBar(
-        title: Text('I.P. ONE Run to The Moon',
+        title: Text('I.P. ONE RUNNING CLUB',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         automaticallyImplyLeading: false,
       ),
@@ -370,7 +370,7 @@ class _RecordPageState extends State<RecordPage> {
             child: Row(
               children: [
                 Text(
-                  'ยินดีต้อนรับชาว ไอ.พี. วัน รันเนอร์',
+                  'ยินดีต้อนรับชาว สมาชิกชมรม RUNNING CLUB',
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

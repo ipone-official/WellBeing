@@ -9,6 +9,7 @@ import 'package:wellbeing/src/bloc/history/history_bloc.dart';
 import 'package:wellbeing/src/bloc/me_recode/record_me_bloc.dart';
 import 'package:wellbeing/src/bloc/record/record_bloc.dart';
 import 'package:wellbeing/src/bloc/record_runner/record_runner_bloc.dart';
+import 'package:wellbeing/src/bloc/user/user_cubit.dart';
 import 'package:wellbeing/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Pages/app_routes.dart';
@@ -54,10 +55,11 @@ class App extends StatelessWidget {
         recordRunnerBloc,
         usersBloc,
         recordMeBloc,
-        contactBloc
+        contactBloc,
+         BlocProvider(create: (_) => UserCubit()),
       ],
       child: MaterialApp(
-        title: "I.P. ONE WELL-BEING",
+        title: "I.P. ONE HAPPY CLUB",
         routes: AppRoute.all,
         theme: theme(),
         home: _buildInitialPage(),

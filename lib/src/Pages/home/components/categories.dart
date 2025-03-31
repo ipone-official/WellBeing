@@ -21,10 +21,10 @@ class Items {
 }
 
 Items Runner = new Items(
-    title: "Run to The Moon",
-    subtitle: "วิ่งให้ถึงดวงจันทร์",
+    title: "Running Club",
+    subtitle: "ชมรม วิ่ง สุข ใจ",
     event: AppRoute.record,
-    img: Asset.RuntothemoonIcon);
+    img: Asset.RunningClub);
 
 Items commingsoon = new Items(
     title: "พบกันเร็ว ๆ นี้", subtitle: "", event: '', img: Asset.App3);

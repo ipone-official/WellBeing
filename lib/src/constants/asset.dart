@@ -16,4 +16,5 @@ class Asset {
   static const profile = '$assetIcon/profile.png';
   static const history = '$assetIcon/history.png';
   static const contact = '$assetIcon/contact.png';
+  static const RunningClub = '$assetImage/Icon_Happy_Club.png';
 }

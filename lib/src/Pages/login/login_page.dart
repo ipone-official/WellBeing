@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wellbeing/src/Pages/app_routes.dart';
 import 'package:wellbeing/src/Pages/models/UserAd.dart';
 import 'package:wellbeing/src/Pages/provider/loginAd_provider.dart';
+import 'package:wellbeing/src/Pages/services/network_service.dart';
 import 'package:wellbeing/src/app.dart';
+import 'package:wellbeing/src/bloc/user/user_cubit.dart';
 import 'package:wellbeing/src/constants/asset.dart';
 import 'package:wellbeing/src/constants/network_api.dart';
 import 'package:wellbeing/src/widgets/custom_flushbar.dart';
@@ -177,20 +180,34 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void authenUser(String userid, String password) {
-    loginAdProvider().getUser(userid, password).then((value) async {
-      UserAd _userAd = value;
-      if (_userAd.authentication && !_userAd.locked) {
-        final prefs = await SharedPreferences.getInstance();
-        prefs.setString(NetworkAPI.token, _userAd.empId);
-        Navigator.pushReplacementNamed(context, AppRoute.home);
-      } else {
-        _showAlert("ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง!", context, "error");
+void authenUser(String userid, String password) {
+  loginAdProvider().getUser(userid, password).then((userAd) async {
+    if (userAd.authentication && !userAd.locked) {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString(NetworkAPI.token, userAd.empId);
+
+      // ✅ ดึงข้อมูล Users จาก API (getUserById)
+      final networkService = NetworkService();
+      print("➡️ GET USER BY ID: ${userAd.empId}");
+      final users = await networkService.getUser(userAd.empId);
+      print("👥 USERS DATA: ${users.map((e) => e.toJson())}");
+      if (users.isNotEmpty) {
+        final user = users.first;
+        print("✅ SET USER: ${user.employeeNameTh}");
+        context.read<UserCubit>().setUser(user);
       }
-    }).catchError((e) {
+
+
+      // ✅ ไปหน้า Home
+      Navigator.pushReplacementNamed(context, AppRoute.home);
+    } else {
       _showAlert("ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง!", context, "error");
-    });
-  }
+    }
+  }).catchError((e) {
+    _showAlert("ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง!", context, "error");
+  });
+}
+
 
   void _showAlert(String dialogMessage, BuildContext context, String TxtIcon) {
     showDialog(
